@@ -1,0 +1,26 @@
+name: r-cecelia-gui-env
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  - numpy=1.22.3
+  - python-dateutil
+  - pytz
+  - openjdk
+  - pip
+  - pip:
+    - python-bioformats
+    - jupyter
+    - napari[all]
+    - napari-animation
+    - h5py
+    - scikit-image
+    - scanpy
+    - zarr
+    - dask
+    - anndata
+    - tifffile
+    - shapely
+    - pip
+    - pyopencl
+    - pandas

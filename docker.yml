@@ -1,0 +1,8 @@
+default:
+  docker:
+    useDocker: TRUE
+    pathMapping:
+      from:
+        - "/cecelia/projects"
+      to:
+        - "/Volumes/Analysis_SSD/Dominik/cecelia/docker-projects/"
