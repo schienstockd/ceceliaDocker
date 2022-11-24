@@ -36,7 +36,7 @@ def start_docker(datashare_path):
 
 if __name__ == '__main__':
   # start ipython
-  p1 = Process(target = start_ipython, args = (conn_file,))
+  p1 = Process(target = start_ipython, args = (debug_file,))
   p1.start()
   
   # wait until jupyter started and replace for docker
@@ -45,7 +45,7 @@ if __name__ == '__main__':
   print(">> wait for kernel...")
   
   while ipython_init is False:
-    if os.path.exists(conn_file):
+    if os.path.exists(debug_file):
       ipython_init = True
     else:
       time.sleep(0.5)
@@ -53,9 +53,7 @@ if __name__ == '__main__':
   print(">> OK")
   
   # replace host
-  shutil.copyfile(conn_file, debug_file)
-  
-  with open(conn_file, 'r') as file:
+  with open(debug_file, 'r') as file:
     data = file.read()
     data = data.replace('127.0.0.1', 'host.docker.internal')
   
