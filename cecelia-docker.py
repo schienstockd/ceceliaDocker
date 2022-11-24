@@ -64,8 +64,9 @@ if __name__ == '__main__':
     file.write(data)
   
   # start docker
-  # p2 = Process(target = start_docker, args = (datashare_path,))
-  # p2.start()
+  p2 = Process(target = start_docker, args = (datashare_path,))
+  p2.start()
   
+  p2.join()
   p1.join()
-  # p2.join()
+  
