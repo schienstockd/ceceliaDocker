@@ -31,7 +31,7 @@ if [ ! -f /home/shiny/local/cecelia/custom.yml ]; then
 else
   echo ">>> Update app"
   # update app
-  R -e 'cecelia::cciaUse("/home/shiny/local/cecelia");cecelia::cciaCreateApp()'
+  R -e 'cecelia::cciaUse("/home/shiny/local/cecelia",initConda=FALSE);cecelia::cciaCreateApp()'
 fi
 
 # copy config files
