@@ -5,6 +5,8 @@ import time
 import shutil
 import IPython
 from multiprocessing import Process
+import urllib.request
+import webbrowser
 
 # get directories for jupyter files
 dir_name = os.path.dirname(__file__)
@@ -13,6 +15,7 @@ datashare_path = os.path.join(dir_name, 'datashare')
 # get connection files
 conn_file = os.path.join(datashare_path, 'connectionFile.json')
 debug_file = os.path.join(datashare_path, 'connectionFile.debug.json')
+shiny_url = 'http://localhost:6860'
 
 # start ipython kernel detached
 def start_ipython(conn_file):
@@ -46,7 +49,7 @@ if __name__ == '__main__':
     # wait until jupyter started and replace for docker
     ipython_init = False
 
-    print(">> wait for kernel...")
+    print('>> wait for kernel...')
 
     while ipython_init is False:
         if os.path.exists(debug_file):
@@ -54,7 +57,7 @@ if __name__ == '__main__':
         else:
             time.sleep(0.5)
 
-    print(">> OK")
+    print('>> OK')
 
     # replace host
     with open(debug_file, 'r') as file:
@@ -70,7 +73,26 @@ if __name__ == '__main__':
     p2 = Process(target = start_docker, args = (datashare_path,))
     p2.start()
 
-    # wiat for docker exit
+    # wait for shiny to start up
+    docker_init = False
+
+    print('>> wait for docker...')
+
+    while docker_init is False:
+        try:
+            ret_code = urllib.request.urlopen(shiny_url).getcode()
+
+            if ret_code == 200:
+                docker_init = True
+            else:
+                time.sleep(0.5)
+        except:
+            time.sleep(1)
+
+    print('>> OK')
+    webbrowser.open(shiny_url)
+
+    # wait for docker exit
     p2.join()
 
     # kill jupyter
