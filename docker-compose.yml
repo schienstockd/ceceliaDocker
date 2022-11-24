@@ -1,17 +1,19 @@
 version: "3.9"
 services:
-
   app:
-    build: shiny
+    build: cciaGPU
     ports:
-      - "6860:6860"
+      - "0.0.0.0:6860:6860"
+    expose:
+      - 6860
     volumes:
       - ~/.ssh:/cecelia/.ssh:ro
-      - ./cecelia:/home/shiny/cecelia
-      - /Volumes/Analysis_SSD/Dominik/cecelia/docker-projects/:/cecelia/projects
-      - /Volumes/USER_data/Dominik/:/cecelia/data
+      - ./datashare:/home/shiny/local
+      - /Volumes/Analysis_SSD/Communal/cecelia/projects/:/cecelia/projects
+      - /Volumes/USER_data/Communal/:/cecelia/data
       #- /Volumes/Lab-Mueller/:/cecelia/lab
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
       - TERM=linux
+      - JUPYTER_LIB_DIR=$JUPYTER_LIB_DIR

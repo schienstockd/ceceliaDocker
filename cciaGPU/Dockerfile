@@ -1,4 +1,4 @@
-FROM rocker/tidyverse:4.2.0
+FROM rocker/ml:4.2.0
 
 ### init shiny
 RUN apt-get update && apt-get install -y \
@@ -16,36 +16,36 @@ RUN apt-get update && apt-get install -y \
 		rsync \
 		# for process management
 		psmisc \
+    # for R 'misc3d'
+    tk \
 		# for EBImage
-		libfftw3-dev \
+		# libfftw3-dev \
+    # for rsvg and sf
+    libudunits2-dev \
+    librsvg2-dev \
+    libgdal-dev \
 		# for RBioFormats and Fiji
 		openjdk-8-jdk-headless \
-		# for zarr
-		cmake \
-		# for non-ml images
-		python3 \
-		python3-pip \
-		# for R 'misc3d'
-		tk \
-		# for rsvg and sf
-		libudunits2-dev \
-		librsvg2-dev \
-		libgdal-dev \
 		# https://github.com/rstudio/rstudio/issues/2254#issuecomment-413939666
 		&& R CMD javareconf \
 		&& apt-get clean \
-		# switch java for Fiji
-		# TODO do we need this?
-		&& update-java-alternatives --set java-1.8.0-openjdk-amd64
+    # switch java for Fiji
+    # TODO do we need this?
+    && update-java-alternatives --set java-1.8.0-openjdk-amd64
 
 ### init shiny app
 # https://dockerquestions.com/2021/05/23/docker-shiny-app-no-such-file-or-directory-while-running-docker-image/
 ENV PATH="/home/shiny/miniconda3/bin:${PATH}"
 ARG PATH="/home/shiny/miniconda3/bin:${PATH}"
 
-### SHINY from here on
 # https://stackoverflow.com/a/39855387
 RUN useradd -ms /bin/bash shiny
+
+# prepare local tools
+RUN mkdir /opt/tools \
+	&& chown shiny:shiny /opt/tools
+
+### SHINY from here on
 USER shiny
 
 # when everything works - this should be one commit?
@@ -67,12 +67,11 @@ RUN cd /home/shiny \
     && rm -f Miniconda3-latest-Linux-x86_64.sh
 
 RUN R -e 'cecelia::cciaCondaCreate(envType = "image-nogui")'
-RUN R -e 'cecelia::cciaModels()'
-RUN R -e 'cecelia::cciaCreateApp()'
+RUN R -e 'cecelia::cciaUse();cecelia::cciaModels()'
 
 # install local tools
-RUN mkdir /opt/tools/fiji \
-	&& mkdir /opt/tools/bftools
+RUN mkdir -p /opt/tools/fiji \
+	&& mkdir -p /opt/tools/bftools
 
 # install Fiji
 # https://github.com/fiji/dockerfiles/blob/master/fiji-openjdk-8/Dockerfile
@@ -99,16 +98,6 @@ RUN wget -q https://downloads.openmicroscopy.org/bio-formats/6.7.0/artifacts/bft
 	&& unzip bftools.zip \
 	&& rm bftools.zip
 
-# pull s-blosc from github
-# otherwise, the software will produce unusable Zarr files
-RUN git clone https://github.com/Blosc/c-blosc.git \
-	&& cd c-blosc \
-	&& mkdir build \
-	&& cd build \
-	&& cmake -DCMAKE_INSTALL_PREFIX=/opt/tools/c-blosc/install/ .. \
-	&& cmake --build . \
-	&& cmake --build . --target install
-
 # add bioformats2raw
 RUN wget -q https://github.com/glencoesoftware/bioformats2raw/releases/download/v0.4.0/bioformats2raw-0.4.0.zip \
 	&& unzip bioformats2raw-0.4.0.zip \
@@ -116,13 +105,18 @@ RUN wget -q https://github.com/glencoesoftware/bioformats2raw/releases/download/
 
 USER root
 
-EXPOSE 6860
-
 ### run server
 # ENTRYPOINT ["sh", "-c"]
 COPY docker-entrypoint.sh /bin/docker-entrypoint.sh
 RUN chmod +x /usr/bin/docker-entrypoint.sh
 
+USER shiny
+
+# update cecelia
+# https://stackoverflow.com/a/65762156
+ADD "https://api.github.com/repos/schienstockd/cecelia/commits?per_page=1" skipcache
+RUN R -e 'lib <- Sys.getenv("R_LIBS_USER")[[1]];remotes::install_github("schienstockd/cecelia", lib = lib, Ncpus = 4, repos = "https://cloud.r-project.org", upgrade = "never")'
+
 #ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
 ENTRYPOINT ["/bin/bash", "-c"]
-CMD ["/usr/bin/docker-entrypoint.sh"]
+CMD ["/usr/bin/docker-entrypoint.sh ${JUPYTER_LIB_DIR}"]
