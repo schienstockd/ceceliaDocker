@@ -34,7 +34,7 @@ that you can use to import data. We also need to tell `shiny` to use the host di
 to open images as they are opened outside of the container within the `napari` environment.
 
 Windows example `docker-compose.yml`
-```bash
+```yaml
 services:
   app:
     volumes:
@@ -44,7 +44,7 @@ services:
 ```
 
 Windows example `datashare/docker.yml`
-```bash
+```yaml
 default:
   docker:
     useDocker: TRUE
@@ -53,6 +53,15 @@ default:
         - "/cecelia/projects"
       to:
         - "E:\\\\Cecelia\\\\Dominik\\\\projects"
+```
+
+- If you have an `NVIDIA` GPU and want to use it, you need to change `build` target
+to `cciaNVIDIA` in `docker-compose.yml`
+
+```yaml
+services:
+  app:
+    build: cciaNVIDIA
 ```
 
 - Run (and build) the `Docker container` with
