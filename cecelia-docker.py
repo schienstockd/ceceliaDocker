@@ -29,6 +29,10 @@ def start_docker(datashare_path):
 
     if platform.system() != 'Windows':
         os.system(f'export JUPYTER_LIB_DIR="{datashare_path}" && docker compose up --build')
+    else:
+        # escape backslashes for R
+        datashare_path = datashare_path.replace('\\', '\\\\')
+        os.system(f'set JUPYTER_LIB_DIR={datashare_path} && docker compose up --build')
 
 if __name__ == '__main__':
     if os.path.exists(datashare_path) is False:
