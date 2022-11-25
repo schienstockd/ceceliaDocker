@@ -55,14 +55,9 @@ default:
         - "E:\\\\Cecelia\\\\Dominik\\\\projects"
 ```
 
-- If you have an `NVIDIA` GPU and want to use it, you need to change the `build` target
-to `cciaNVIDIA` in `docker-compose.yml`
-
-```yaml
-services:
-  app:
-    build: cciaNVIDIA
-```
+- If you have an `NVIDIA` GPU and want to use it, you need to rename
+`docker-compose.yml` to `docker-compose.cpu.yml` and
+`docker-compose.nvidia.yml` to `docker-compose.yml`.
 
 - Run (and build) the `Docker container` with
 `cecelia-MacOSX-docker.sh` (Mac)

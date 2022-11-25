@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  app:
+    #image: ceceliadocker_app
+    build: cciaGPU
+    ports:
+      - "0.0.0.0:6860:6860"
+    expose:
+      - 6860
+    volumes:
+      #- ~/.ssh:/cecelia/.ssh:ro
+      - C:\Users\schienstockd\ceceliaDocker\datashare:/home/shiny/local
+      - E:\Cecelia\Dominik\projects:/cecelia/projects
+      - E:\Cecelia\Dominik\data:/cecelia/data
+      #- /Volumes/Lab-Mueller/:/cecelia/lab
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - TERM=linux
+      - JUPYTER_LIB_DIR=$JUPYTER_LIB_DIR
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

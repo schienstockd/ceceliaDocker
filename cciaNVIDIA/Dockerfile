@@ -109,7 +109,7 @@ USER root
 # https://github.com/NVIDIA/nvidia-docker/issues/871#issuecomment-966668913
 ARG nvidia_binary_version="515.86.01"
 ARG nvidia_binary="NVIDIA-Linux-x86_64-${nvidia_binary_version}.run"
-RUN apt-get install -y module-init-tools
+RUN apt-get install -y kmod
 RUN wget -q https://us.download.nvidia.com/XFree86/Linux-x86_64/${nvidia_binary_version}/${nvidia_binary} \
   && chmod +x ${nvidia_binary} \
   && ./${nvidia_binary} --accept-license --ui=none --no-kernel-module --no-questions \
