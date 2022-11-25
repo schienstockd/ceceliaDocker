@@ -52,7 +52,7 @@ default:
       from:
         - "/cecelia/projects"
       to:
-        - "E:\Cecelia\Dominik\projects"
+        - "E:\\Cecelia\\Dominik\\projects"
 ```
 
 - Run (and build) the `Docker container` with
