@@ -55,7 +55,7 @@ default:
         - "E:\\\\Cecelia\\\\Dominik\\\\projects"
 ```
 
-- If you have an `NVIDIA` GPU and want to use it, you need to rename
+- **THIS DOES NOT WORK YET** If you have an `NVIDIA` GPU and want to use it, you need to rename
 `docker-compose.yml` to `docker-compose.cpu.yml` and
 `docker-compose.nvidia.yml` to `docker-compose.yml`.
 
