@@ -1,0 +1,4 @@
+- Adjust WSL directory: https://stackoverflow.com/a/63752264
+- To disable WSL: set 'wslEngineEnabled' to false in %AppData%\Roaming\Docker\settings.json
+- install JDK: https://www.oracle.com/au/java/technologies/javase/javase8-archive-downloads.html
+- install Microsoft Visual C++ >= 14.0 with Microsoft C++ Build Tools: https://visualstudio.microsoft.com/visual-cpp-build-tools/
