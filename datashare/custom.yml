@@ -1,0 +1,22 @@
+default:
+  dirs:
+    bftools: "/opt/tools/bftools"
+    bioformats2raw: "/opt/tools/bioformats2raw-0.4.0"
+    projects: "/cecelia/projects"
+  volumes:
+    # home: "~/"
+    # computer: "/"
+    projects: "/cecelia/projects"
+    data: "/cecelia/data"
+    lab: "/cecelia/lab"
+    # shinyshare: "/datashare"
+  python:
+    viewer:
+      connectionFile: "connectionFile.json"
+    conda:
+      env: "r-cecelia-env"
+      dir: "/home/shiny/miniconda3/"
+      source:
+        env: r-cecelia-env
+  imagej:
+    path: "/opt/tools/fiji/Fiji.app/ImageJ-linux64"
