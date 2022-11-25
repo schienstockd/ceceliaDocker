@@ -1,8 +1,7 @@
 version: "3.9"
 services:
   app:
-    #image: ceceliadocker_app
-    build: cciaGPU
+    build: cciaNVIDIA
     ports:
       - "0.0.0.0:6860:6860"
     expose:
