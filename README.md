@@ -55,7 +55,7 @@ default:
         - "E:\\\\Cecelia\\\\Dominik\\\\projects"
 ```
 
-- If you have an `NVIDIA` GPU and want to use it, you need to change `build` target
+- If you have an `NVIDIA` GPU and want to use it, you need to change the `build` target
 to `cciaNVIDIA` in `docker-compose.yml`
 
 ```yaml
