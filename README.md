@@ -26,6 +26,9 @@ conda env create --file=conda-gui-env.yml
 ```
 
 - You need to adjust the filepaths in `docker-compose.yml` and `datashare/docker.yml`.
+This will tell `Docker` where your `projects` are stored and the `data` location
+that you can use to import data. We also need to tell `shiny` to use the host directory
+to open images as they are opened outside of the container within the `napari` environment.
 
 Windows example `docker-compose.yml`
 ```bash
