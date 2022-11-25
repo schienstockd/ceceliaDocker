@@ -17,12 +17,7 @@ a separate `conda` environment with which the `Docker container` can communicate
 git clone https://github.com/schienstockd/ceceliaDocker.git
 ```
 
-- For `Windows`, you will need the following:
-
-```
-- [Install JDK](https://www.oracle.com/au/java/technologies/javase/javase8-archive-downloads.html)
-- [Install Microsoft Visual C++ >= 14.0](https://visualstudio.microsoft.com/visual-cpp-build-tools/) with Microsoft C++ Build Tools: 
-```
+- For `Windows`, you will need to [install JDK](https://www.oracle.com/au/java/technologies/javase/javase8-archive-downloads.html) and [Microsoft Visual C++ >= 14.0](https://visualstudio.microsoft.com/visual-cpp-build-tools/) with Microsoft C++ Build Tools.
 
 - Create `conda` environment
 
