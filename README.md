@@ -20,8 +20,8 @@ git clone https://github.com/schienstockd/ceceliaDocker.git
 - For `Windows`, you will need the following:
 
 ```
-- Install JDK: https://www.oracle.com/au/java/technologies/javase/javase8-archive-downloads.html
-- Install Microsoft Visual C++ >= 14.0 with Microsoft C++ Build Tools: https://visualstudio.microsoft.com/visual-cpp-build-tools/
+- [Install JDK](https://www.oracle.com/au/java/technologies/javase/javase8-archive-downloads.html)
+- [Install Microsoft Visual C++ >= 14.0](https://visualstudio.microsoft.com/visual-cpp-build-tools/) with Microsoft C++ Build Tools: 
 ```
 
 - Create `conda` environment
