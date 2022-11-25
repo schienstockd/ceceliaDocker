@@ -2,7 +2,7 @@
 <!-- badges: end -->
 
 This is a `Dockerised` version of [`Cecelia`](https://github.com/schienstockd/cecelia).
-We currently did not includ in the container `napari`. That means, we have to install
+We currently do not include `napari` in the container. That means, we have to install
 a separate `conda` environment with which the `Docker container` can communicate.
 
 **This package is pre-alpha**
