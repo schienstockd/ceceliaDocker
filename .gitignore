@@ -1,3 +1,5 @@
-datashare
+datashare/cecelia/*
+datashare/config.yml
+datashare/py/*
 *.tar
 .ipynb_checkpoints
