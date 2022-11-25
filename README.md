@@ -6,6 +6,7 @@ We currently do not include `napari` in the container. That means, we have to in
 a separate `conda` environment with which the `Docker container` can communicate.
 
 **This package is pre-alpha**
+
 We currently have no pre-build containers.
 This repository will build the `Docker container`.
 
