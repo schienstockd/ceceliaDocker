@@ -25,6 +25,30 @@ git clone https://github.com/schienstockd/ceceliaDocker.git
 conda env create --file=conda-gui-env.yml
 ```
 
+- You need to adjust the filepaths in `docker-compose.yml` and `datashare/docker.yml`.
+
+Windows example `docker-compose.yml`
+```bash
+services:
+  app:
+    volumes:
+      - C:\Users\schienstockd\ceceliaDocker\datashare:/home/shiny/local
+      - E:\Cecelia\Dominik\projects:/cecelia/projects
+      - E:\Cecelia\Dominik\data:/cecelia/data
+```
+
+Windows example `datashare/docker.yml`
+```bash
+default:
+  docker:
+    useDocker: TRUE
+    pathMapping:
+      from:
+        - "/cecelia/projects"
+      to:
+        - "E:\Cecelia\Dominik\projects"
+```
+
 - Run (and build) the `Docker container` with
 `cecelia-MacOSX-docker.sh` (Mac)
 or `cecelia-Windows-docker.bat` (Windows). This will start the local `napari` environment,
