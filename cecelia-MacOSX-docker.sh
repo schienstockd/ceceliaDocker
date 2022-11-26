@@ -14,7 +14,7 @@ echo ">> START Cecelia"
 
 # get script directory
 DIR_NAME="$(cd "$(dirname "$0")" > /dev/null 2>&1 || exit; pwd -P)"
-$DIR_NAME
+cd $DIR_NAME
 
 # run cecelia
 $CONDA_DIR/bin/conda run -n r-cecelia-gui-env --no-capture-output python cecelia-docker.py
