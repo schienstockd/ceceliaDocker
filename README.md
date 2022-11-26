@@ -21,6 +21,8 @@ git clone https://github.com/schienstockd/ceceliaDocker.git
 ```
 
 - For `Windows`, you will need to [install JDK](https://www.oracle.com/au/java/technologies/javase/javase8-archive-downloads.html) and [Microsoft Visual C++ >= 14.0](https://visualstudio.microsoft.com/visual-cpp-build-tools/) with Microsoft C++ Build Tools.
+Docker is using `WSL 2` by default now which is also required for `GPU` access on Windows.
+To change the default location of the `WSL 2` data storage follow this [`SO`](https://stackoverflow.com/a/63752264) post.
 
 - Create `conda` environment
 
