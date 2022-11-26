@@ -28,9 +28,10 @@ git clone https://github.com/schienstockd/ceceliaDocker.git
 conda env create --file=conda-gui-env.yml
 ```
 
-- **THIS DOES NOT WORK YET** If you have an `NVIDIA` GPU and want to use it, you need to rename
+- If you have an `NVIDIA` GPU and want to use it, you need to rename
 `docker-compose.yml` to `docker-compose.cpu.yml` and
-`docker-compose.nvidia.yml` to `docker-compose.yml`.
+`docker-compose.nvidia.yml` to `docker-compose.yml`. To check that your `GPU` is detected
+by docker use: `docker run --rm -it --gpus=all nvcr.io/nvidia/k8s/cuda-sample:nbody nbody -gpu -benchmark`.
 
 - You need to adjust the filepaths in `docker-compose.yml` and `datashare/docker.yml`.
 This will tell `Docker` where your `projects` are stored and the `data` location
