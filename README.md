@@ -28,6 +28,10 @@ git clone https://github.com/schienstockd/ceceliaDocker.git
 conda env create --file=conda-gui-env.yml
 ```
 
+- **THIS DOES NOT WORK YET** If you have an `NVIDIA` GPU and want to use it, you need to rename
+`docker-compose.yml` to `docker-compose.cpu.yml` and
+`docker-compose.nvidia.yml` to `docker-compose.yml`.
+
 - You need to adjust the filepaths in `docker-compose.yml` and `datashare/docker.yml`.
 This will tell `Docker` where your `projects` are stored and the `data` location
 that you can use to import data. We also need to tell `shiny` to use the host directory
@@ -54,10 +58,6 @@ default:
       to:
         - "E:\\\\Cecelia\\\\Dominik\\\\projects"
 ```
-
-- **THIS DOES NOT WORK YET** If you have an `NVIDIA` GPU and want to use it, you need to rename
-`docker-compose.yml` to `docker-compose.cpu.yml` and
-`docker-compose.nvidia.yml` to `docker-compose.yml`.
 
 - Run (and build) the `Docker container` with
 `cecelia-MacOSX-docker.sh` (Mac)
