@@ -27,6 +27,7 @@ R -e 'file.copy(system.file("config.yml",package="cecelia"),"/home/shiny/local/"
 # if [ ! -d /home/shiny/local/app ]; then
 if [ ! -f /home/shiny/local/cecelia/custom.yml ]; then
   echo ">>> Init app"
+	R -e 'cecelia::cciaUse("/home/shiny/cecelia",initConda=FALSE,sourceConda=FALSE);cecelia::cciaCreateApp()'
   cp -R /home/shiny/cecelia/ /home/shiny/local/
 else
   echo ">>> Update app"
