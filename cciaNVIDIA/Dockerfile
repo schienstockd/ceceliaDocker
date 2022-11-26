@@ -24,6 +24,9 @@ RUN apt-get update && apt-get install -y \
     libudunits2-dev \
     librsvg2-dev \
     libgdal-dev \
+		# for GPU
+		kmod \
+		pciutils \
 		# for RBioFormats and Fiji
 		openjdk-8-jdk-headless \
 		# https://github.com/rstudio/rstudio/issues/2254#issuecomment-413939666
@@ -107,13 +110,13 @@ USER root
 
 # install nvidia driver
 # https://github.com/NVIDIA/nvidia-docker/issues/871#issuecomment-966668913
-ARG nvidia_binary_version="515.86.01"
-ARG nvidia_binary="NVIDIA-Linux-x86_64-${nvidia_binary_version}.run"
-RUN apt-get install -y kmod
-RUN wget -q https://us.download.nvidia.com/XFree86/Linux-x86_64/${nvidia_binary_version}/${nvidia_binary} \
-  && chmod +x ${nvidia_binary} \
-  && ./${nvidia_binary} --accept-license --ui=none --no-kernel-module --no-questions \
-  && rm -rf ${nvidia_binary}
+# it should work without Linux driver
+# ARG nvidia_binary_version="515.86.01"
+# ARG nvidia_binary="NVIDIA-Linux-x86_64-${nvidia_binary_version}.run"
+# RUN wget -q https://us.download.nvidia.com/XFree86/Linux-x86_64/${nvidia_binary_version}/${nvidia_binary} \
+#   && chmod +x ${nvidia_binary} \
+#   && ./${nvidia_binary} --accept-license --ui=none --no-kernel-module --no-questions \
+#   && rm -rf ${nvidia_binary}
 
 ### run server
 # ENTRYPOINT ["sh", "-c"]
