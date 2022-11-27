@@ -24,16 +24,8 @@ R -e 'file.copy(system.file("config.yml",package="cecelia"),"/home/shiny/local/"
 #R -e 'lib <- Sys.getenv("R_LIBS_USER")[[1]];remotes::install_github("schienstockd/cecelia",lib=lib,Ncpus=4,repos="https://cloud.r-project.org",upgrade="never")'
 
 # copy in local cecelia files
-# if [ ! -d /home/shiny/local/app ]; then
-if [ ! -f /home/shiny/local/cecelia/custom.yml ]; then
-  echo ">>> Init app"
-	R -e 'cecelia::cciaUse("/home/shiny/cecelia",initConda=FALSE,sourceConda=FALSE);cecelia::cciaCreateApp()'
-  cp -R /home/shiny/cecelia/ /home/shiny/local/
-else
-  echo ">>> Update app"
-  # update app
-  R -e 'cecelia::cciaUse("/home/shiny/local/cecelia",initConda=FALSE,sourceConda=FALSE);cecelia::cciaCreateApp()'
-fi
+echo ">> Update app"
+R -e 'cecelia::cciaUse("/home/shiny/local/cecelia",initConda=FALSE,sourceConda=FALSE);cecelia::cciaCreateApp()'
 
 # copy config files
 cp /home/shiny/local/custom.yml /home/shiny/local/cecelia/
