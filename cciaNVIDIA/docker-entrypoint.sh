@@ -12,6 +12,7 @@ chmod 600 -R /home/shiny/.ssh/*
 # TODO how else would you do that .. ?
 # https://stackoverflow.com/a/38946665
 rm /home/shiny/local/py/*.py
+rm /home/shiny/local/py/*/*.py
 rm -fr /home/shiny/local/py/__pycache__
 R -e 'file.copy(system.file("py",package="cecelia"),"/home/shiny/local/",recursive=TRUE)'
 R -e 'file.copy(system.file("config.yml",package="cecelia"),"/home/shiny/local/")'
