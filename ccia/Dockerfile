@@ -46,6 +46,8 @@ RUN mkdir /opt/tools \
 	&& chown shiny:shiny /opt/tools
 
 ### SHINY from here on
+# shiny needs 0.5.4
+RUN R -e 'remove.packages("htmltools")'
 USER shiny
 
 # when everything works - this should be one commit?
