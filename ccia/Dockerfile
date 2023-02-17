@@ -118,6 +118,7 @@ USER shiny
 # https://stackoverflow.com/a/65762156
 ADD "https://api.github.com/repos/schienstockd/cecelia/commits?per_page=1" skipcache
 RUN R -e 'lib <- Sys.getenv("R_LIBS_USER")[[1]];remotes::install_github("schienstockd/cecelia", lib = lib, Ncpus = 4, repos = "https://cloud.r-project.org", upgrade = "never")'
+RUN R -e 'cecelia::cciaCondaCreate(envType = "image-nogui")'
 
 #ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
 ENTRYPOINT ["/bin/bash", "-c"]

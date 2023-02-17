@@ -2,6 +2,7 @@ default:
   dirs:
     bftools: "/opt/tools/bftools"
     bioformats2raw: "/opt/tools/bioformats2raw-0.4.0"
+    blosc: "/home/shiny/miniconda3/envs/r-cecelia-env"
     projects: "/cecelia/projects"
   volumes:
     # home: "~/"
