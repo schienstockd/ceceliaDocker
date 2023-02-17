@@ -55,7 +55,7 @@ USER shiny
 # https://stackoverflow.com/a/43283085
 RUN R -e 'dir.create(path = Sys.getenv("R_LIBS_USER"), showWarnings = FALSE, recursive = TRUE)'
 RUN R -e 'if (!require("remotes", quietly = TRUE)) install.packages("remotes", lib = Sys.getenv("R_LIBS_USER"), repos = "https://cloud.r-project.org")'
-RUN R -e 'remotes::install_github("schienstockd/cecelia", lib = Sys.getenv("R_LIBS_USER"), Ncpus = 4, repos = "https://cloud.r-project.org")'
+RUN R -e 'setRepositories(ind=1:2);remotes::install_github("schienstockd/cecelia", lib = Sys.getenv("R_LIBS_USER"), Ncpus = 4, repos = "https://cloud.r-project.org")'
 RUN R -e 'cecelia::cciaAppRequirements(lib = Sys.getenv("R_LIBS_USER"), repos = "https://cloud.r-project.org")'
 RUN R -e 'cecelia::cciaBiocRequirements(lib = Sys.getenv("R_LIBS_USER"), ask = FALSE)'
 RUN R -e 'cecelia::cciaSetup()'
@@ -117,7 +117,7 @@ USER shiny
 # update cecelia
 # https://stackoverflow.com/a/65762156
 ADD "https://api.github.com/repos/schienstockd/cecelia/commits?per_page=1" skipcache
-RUN R -e 'lib <- Sys.getenv("R_LIBS_USER")[[1]];remotes::install_github("schienstockd/cecelia", lib = lib, Ncpus = 4, repos = "https://cloud.r-project.org", upgrade = "never")'
+RUN R -e 'lib <- Sys.getenv("R_LIBS_USER")[[1]];setRepositories(ind=1:2);remotes::install_github("schienstockd/cecelia", lib = lib, Ncpus = 4, repos = "https://cloud.r-project.org", upgrade = "never")'
 
 #ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
 ENTRYPOINT ["/bin/bash", "-c"]
