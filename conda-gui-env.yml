@@ -13,6 +13,8 @@ dependencies:
     - jupyter
     - napari[all]
     - napari-animation
+    - apoc
+    - napari-accelerated-pixel-and-object-classification
     - h5py
     - scikit-image
     - scanpy
