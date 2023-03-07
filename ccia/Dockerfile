@@ -47,20 +47,18 @@ RUN useradd -ms /bin/bash shiny
 RUN mkdir /opt/tools \
 	&& chown shiny:shiny /opt/tools
 
-### SHINY from here on
-# shiny needs 0.5.4
-RUN R -e 'remove.packages(c("htmltools", "tidyr", "rlang"))'
-USER shiny
-
-# when everything works - this should be one commit?
+# when everything works - this should be one commit?
 # Use user library
 # https://stackoverflow.com/a/43283085
-RUN R -e 'dir.create(path = Sys.getenv("R_LIBS_USER"), showWarnings = FALSE, recursive = TRUE)'
-COPY Rprofile ~/.Rprofile
-RUN R -e 'if (!require("remotes", quietly = TRUE)) install.packages("remotes", lib = Sys.getenv("R_LIBS_USER"), repos = "https://cloud.r-project.org")'
-RUN R -e 'remotes::install_github("schienstockd/cecelia", lib = Sys.getenv("R_LIBS_USER"), Ncpus = 4, repos = "https://cloud.r-project.org")'
-RUN R -e 'cecelia::cciaAppRequirements(lib = Sys.getenv("R_LIBS_USER"), repos = "https://cloud.r-project.org")'
-RUN R -e 'cecelia::cciaBiocRequirements(lib = Sys.getenv("R_LIBS_USER"), ask = FALSE)'
+#RUN R -e 'dir.create(path = Sys.getenv("R_LIBS_USER"), showWarnings = FALSE, recursive = TRUE)'
+RUN R -e 'if (!require("remotes", quietly = TRUE)) install.packages("remotes", repos = "https://cloud.r-project.org")'
+RUN R -e 'remotes::install_github("schienstockd/cecelia", Ncpus = 4, repos = "https://cloud.r-project.org")'
+RUN R -e 'cecelia::cciaAppRequirements(repos = "https://cloud.r-project.org")'
+RUN R -e 'cecelia::cciaBiocRequirements(ask = FALSE)'
+
+### SHINY from here on
+USER shiny
+
 RUN R -e 'cecelia::cciaSetup()'
 
 # install miniconda for shiny
@@ -115,12 +113,12 @@ USER root
 COPY docker-entrypoint.sh /bin/docker-entrypoint.sh
 RUN chmod +x /usr/bin/docker-entrypoint.sh
 
-USER shiny
-
 # update cecelia
 # https://stackoverflow.com/a/65762156
 ADD "https://api.github.com/repos/schienstockd/cecelia/commits?per_page=1" skipcache
-RUN R -e 'lib <- Sys.getenv("R_LIBS_USER")[[1]];remotes::install_github("schienstockd/cecelia", lib = lib, Ncpus = 4, repos = "https://cloud.r-project.org", upgrade = "never")'
+RUN R -e 'remotes::install_github("schienstockd/cecelia", Ncpus = 4, repos = "https://cloud.r-project.org", upgrade = "never")'
+
+USER shiny
 RUN R -e 'cecelia::cciaCondaCreate(envType = "image-nogui")'
 
 #ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
