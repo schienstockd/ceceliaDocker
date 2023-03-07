@@ -56,6 +56,7 @@ USER shiny
 # Use user library
 # https://stackoverflow.com/a/43283085
 RUN R -e 'dir.create(path = Sys.getenv("R_LIBS_USER"), showWarnings = FALSE, recursive = TRUE)'
+COPY Rprofile ~/.Rprofile
 RUN R -e 'if (!require("remotes", quietly = TRUE)) install.packages("remotes", lib = Sys.getenv("R_LIBS_USER"), repos = "https://cloud.r-project.org")'
 RUN R -e 'remotes::install_github("schienstockd/cecelia", lib = Sys.getenv("R_LIBS_USER"), Ncpus = 4, repos = "https://cloud.r-project.org")'
 RUN R -e 'cecelia::cciaAppRequirements(lib = Sys.getenv("R_LIBS_USER"), repos = "https://cloud.r-project.org")'
