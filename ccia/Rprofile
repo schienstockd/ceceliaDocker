@@ -1,2 +1,2 @@
 # make sure user libraries are first
-.libPaths(c(Sys.getenv("R_LIBS_USER")[[1]], .libPaths()))
+.libPaths(c(Sys.getenv("R_LIBS_USER"), .libPaths()))
