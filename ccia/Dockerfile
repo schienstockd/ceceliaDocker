@@ -49,7 +49,7 @@ RUN mkdir /opt/tools \
 
 ### SHINY from here on
 # shiny needs 0.5.4
-RUN R -e 'remove.packages(c("htmltools", "tidyr"))'
+RUN R -e 'remove.packages(c("htmltools", "tidyr", "rlang"))'
 USER shiny
 
 # when everything works - this should be one commit?
