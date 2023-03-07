@@ -52,7 +52,7 @@ RUN mkdir /opt/tools \
 # https://stackoverflow.com/a/43283085
 #RUN R -e 'dir.create(path = Sys.getenv("R_LIBS_USER"), showWarnings = FALSE, recursive = TRUE)'
 RUN R -e 'if (!require("remotes", quietly = TRUE)) install.packages("remotes", repos = "https://cloud.r-project.org")'
-RUN R -e 'remotes::install_github("schienstockd/cecelia", Ncpus = 4, repos = "https://cloud.r-project.org")'
+RUN R -e 'remotes::install_github("schienstockd/cecelia", Ncpus = 4, repos = "https://cloud.r-project.org", upgrade = "always")'
 RUN R -e 'cecelia::cciaAppRequirements(repos = "https://cloud.r-project.org")'
 RUN R -e 'cecelia::cciaBiocRequirements(ask = FALSE)'
 
