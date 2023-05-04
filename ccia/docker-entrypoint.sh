@@ -28,6 +28,9 @@ R -e 'file.copy(system.file("config.yml",package="cecelia"),"/home/shiny/local/"
 echo ">> Update app"
 R -e 'cecelia::cciaUse("/home/shiny/local/cecelia",initConda=FALSE,sourceConda=FALSE);cecelia::cciaCreateApp()'
 
+# copy models
+cp -R /home/shiny/cecelia/models /home/shiny/local/cecelia/
+
 # copy config files
 cp /home/shiny/local/custom.yml /home/shiny/local/cecelia/
 cp /home/shiny/local/docker.yml /home/shiny/local/cecelia/
