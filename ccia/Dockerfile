@@ -59,8 +59,6 @@ RUN R -e 'cecelia::cciaBiocRequirements(ask = FALSE)'
 ### SHINY from here on
 USER shiny
 
-RUN R -e 'cecelia::cciaSetup()'
-
 # install miniconda for shiny
 # https://linuxhandbook.com/dockerize-python-apps/
 RUN cd /home/shiny \
@@ -70,7 +68,8 @@ RUN cd /home/shiny \
     && rm -f Miniconda3-latest-Linux-x86_64.sh
 
 RUN R -e 'cecelia::cciaCondaCreate(envType = "image-nogui")'
-RUN R -e 'cecelia::cciaUse();cecelia::cciaModels()'
+RUN R -e 'cecelia::cciaSetup("/home/shiny/local/cecelia")'
+RUN R -e 'cecelia::cciaUse("/home/shiny/local/cecelia");cecelia::cciaModels()'
 
 # install local tools
 RUN mkdir -p /opt/tools/fiji \
