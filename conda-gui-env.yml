@@ -9,7 +9,7 @@ dependencies:
   - openjdk
   - pip
   - pip:
-    - python-bioformats
+    - python-bioformats==4.0.6
     - jupyter
     - napari[all]
     - napari-animation
