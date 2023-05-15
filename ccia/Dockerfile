@@ -108,6 +108,13 @@ RUN wget -q https://github.com/glencoesoftware/bioformats2raw/releases/download/
 
 USER root
 
+# add blosc
+RUN git clone https://github.com/Blosc/c-blosc.git \
+	&& cd c-blosc \
+	&& cmake . \
+	&& cmake --build . --target install \
+	&& cd ..
+
 ### run server
 # ENTRYPOINT ["sh", "-c"]
 COPY docker-entrypoint.sh /bin/docker-entrypoint.sh
