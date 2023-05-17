@@ -5,4 +5,5 @@ default:
       from:
         - "/cecelia/projects"
       to:
-        - "/Volumes/Analysis_SSD/Communal/cecelia/projects/"
+        # - "/Volumes/Analysis_SSD/Communal/cecelia/projects/"
+        - "E:\\Cecelia\\Dominik\\projects"

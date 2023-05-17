@@ -38,10 +38,6 @@ cp /home/shiny/local/docker.yml /home/shiny/local/cecelia/
 # move jupyter files
 mv /home/shiny/local/connectionFile.* /home/shiny/local/cecelia/app/viewer/
 
-# OMP: Error #15: Initializing libiomp5.dylib, but found libomp.dylib already initialized.
-# https://github.com/dmlc/xgboost/issues/1715#issuecomment-438924721
-export KMP_DUPLICATE_LIB_OK=TRUE
-
 # start shiny
 R_CALL="library(cecelia);cciaUse('/home/shiny/local/cecelia',initJupyter=TRUE,jupyterConnectionFile='/home/shiny/local/cecelia/app/viewer/connectionFile.json',jupyterLibDir='$1');cciaRunApp(port=6860,host='0.0.0.0')"
 R -e $R_CALL

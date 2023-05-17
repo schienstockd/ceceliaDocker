@@ -126,7 +126,7 @@ ADD "https://api.github.com/repos/schienstockd/cecelia/commits?per_page=1" skipc
 RUN R -e 'remotes::install_github("schienstockd/cecelia", Ncpus = 4, repos = "https://cloud.r-project.org", upgrade = "never")'
 
 USER shiny
-RUN R -e 'cecelia::cciaCondaCreate(envType = "image-nogui")'
+# RUN R -e 'cecelia::cciaCondaCreate(envType = "image-nogui")'
 
 #ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
 ENTRYPOINT ["/bin/bash", "-c"]
