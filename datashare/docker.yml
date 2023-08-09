@@ -2,9 +2,11 @@ default:
   docker:
     useDocker: TRUE
     pathMapping:
-      from:
-        - "/cecelia/projects"
-        - "/home/shiny/local/cecelia"
-      to:
-        - "/Volumes/Analysis_SSD/Communal/cecelia/projects/"
-        - "/Users/mueller-heath/cecelia/app"
+      from: {
+        "projects": "/cecelia/projects",
+        "home": "/home/shiny/local/cecelia"
+      }
+      to: {
+        "projects": "/Volumes/Analysis_SSD/Communal/cecelia/projects/"
+        "home": "/Users/mueller-heath/cecelia/app"
+      }
