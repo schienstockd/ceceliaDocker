@@ -4,6 +4,7 @@ default:
     pathMapping:
       from:
         - "/cecelia/projects"
+        - "/home/shiny/local/cecelia"
       to:
-        # - "/Volumes/Analysis_SSD/Communal/cecelia/projects/"
-        - "E:\\Cecelia\\Dominik\\projects"
+        - "/Volumes/Analysis_SSD/Communal/cecelia/projects/"
+        - "/Users/mueller-heath/cecelia/app"
