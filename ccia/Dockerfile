@@ -102,9 +102,9 @@ RUN wget -q https://downloads.openmicroscopy.org/bio-formats/6.7.0/artifacts/bft
 	&& rm bftools.zip
 
 # add bioformats2raw
-RUN wget -q https://github.com/glencoesoftware/bioformats2raw/releases/download/v0.4.0/bioformats2raw-0.4.0.zip \
-	&& unzip bioformats2raw-0.4.0.zip \
-	&& rm bioformats2raw-0.4.0.zip
+RUN wget -q https://github.com/glencoesoftware/bioformats2raw/releases/download/v0.6.1/bioformats2raw-0.6.1.zip \
+	&& unzip bioformats2raw-0.6.1.zip \
+	&& rm bioformats2raw-0.6.1.zip
 
 USER root
 
