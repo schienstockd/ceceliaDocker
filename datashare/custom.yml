@@ -1,7 +1,7 @@
 default:
   dirs:
     bftools: "/opt/tools/bftools"
-    bioformats2raw: "/opt/tools/bioformats2raw-0.4.0"
+    bioformats2raw: "/opt/tools/bioformats2raw-0.6.1"
     blosc: ""
     projects: "/cecelia/projects"
   volumes:
