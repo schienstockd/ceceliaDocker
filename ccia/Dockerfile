@@ -30,10 +30,10 @@ RUN apt-get update && apt-get install -y \
 		openjdk-8-jdk-headless \
 		# https://github.com/rstudio/rstudio/issues/2254#issuecomment-413939666
 		&& R CMD javareconf \
-		&& apt-get clean \
+		&& apt-get clean
     # switch java for Fiji
     # TODO do we need this?
-    && update-java-alternatives --set java-1.8.0-openjdk-amd64
+    # && update-java-alternatives --set java-1.8.0-openjdk-amd64
 
 ### init shiny app
 # https://dockerquestions.com/2021/05/23/docker-shiny-app-no-such-file-or-directory-while-running-docker-image/
