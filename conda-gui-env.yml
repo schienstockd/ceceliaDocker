@@ -27,3 +27,4 @@ dependencies:
     - pyopencl
     - pandas
     - trimesh
+    - ome-types
