@@ -121,7 +121,7 @@ RUN git clone https://github.com/Blosc/c-blosc.git \
 ### run server
 # ENTRYPOINT ["sh", "-c"]
 COPY docker-entrypoint.sh /bin/docker-entrypoint.sh
-RUN chmod +x /usr/bin/docker-entrypoint.sh
+RUN chmod +rx /usr/bin/docker-entrypoint.sh
 
 # update cecelia
 # https://stackoverflow.com/a/65762156

@@ -1,8 +1,8 @@
 version: "3.9"
 services:
   app:
-    # build: ccia
-    image: schienstockd/cecelia:latest
+    build: ccia
+    # image: schienstockd/cecelia:latest
     ports:
       - "0.0.0.0:6860:6860"
     expose:
@@ -10,7 +10,7 @@ services:
     volumes:
       - ~/.ssh:/cecelia/.ssh:ro
       - ./datashare:/home/shiny/local
-      - /Volumes/Analysis_SSD/Communal/cecelia/projects/:/cecelia/projects
+      - /Volumes/USER_data/Dominik/CECELIA_DOCKER/projects/:/cecelia/projects
       - /Volumes/USER_data/Communal/:/cecelia/data
       #- /Volumes/Lab-Mueller/:/cecelia/lab
     extra_hosts:
