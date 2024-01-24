@@ -31,11 +31,13 @@ def start_docker(datashare_path):
   # Docker compose is a bit complicated
   # https://github.com/docker/compose/issues/1487
   if platform.system() != 'Windows':
-    os.system(f'export JUPYTER_LIB_DIR="{datashare_path}" && docker compose up --build -V --remove-orphans')
+    # os.system(f'export JUPYTER_LIB_DIR="{datashare_path}" && docker compose up --build -V --remove-orphans --force-recreate')
+    os.system(f'export JUPYTER_LIB_DIR="{datashare_path}" && docker compose up --build -V')
   else:
     # escape backslashes for R
     datashare_path = datashare_path.replace('\\', '\\\\')
-    os.system(f'set JUPYTER_LIB_DIR={datashare_path} && docker compose up --build -V --remove-orphans')
+    # os.system(f'set JUPYTER_LIB_DIR={datashare_path} && docker compose up --build -V --remove-orphans --force-recreate')
+    os.system(f'set JUPYTER_LIB_DIR={datashare_path} && docker compose up --build -V')
 
 if __name__ == '__main__':
   if os.path.exists(datashare_path) is False:
