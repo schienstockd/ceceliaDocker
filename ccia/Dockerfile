@@ -126,6 +126,9 @@ RUN chmod +rx /usr/bin/docker-entrypoint.sh
 # update cecelia
 # https://stackoverflow.com/a/65762156
 ADD "https://api.github.com/repos/schienstockd/cecelia/commits?per_page=1" skipcache
+# 'lib = "/usr/local/lib/R/site-library"' is not writable
+# https://github.com/rocker-org/rocker/issues/513
+RUN chmod -R 775 /usr/local/lib/R/site-library
 RUN R -e 'remotes::install_github("schienstockd/cecelia", Ncpus = 4, repos = "https://cloud.r-project.org", upgrade = "never")'
 
 USER shiny

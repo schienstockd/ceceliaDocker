@@ -10,6 +10,7 @@ import webbrowser
 
 # get directories for jupyter files
 dir_name = os.path.dirname(__file__)
+
 datashare_path = os.path.join(dir_name, 'datashare')
 
 # get connection files
@@ -28,15 +29,15 @@ def start_docker(datashare_path):
     print('>> Start Docker')
 
     if platform.system() != 'Windows':
-        os.system(f'export JUPYTER_LIB_DIR="{datashare_path}" && docker compose up --build')
+        os.system(f'export JUPYTER_LIB_DIR="{datashare_path}" && docker compose up --build --remove-orphans')
     else:
         # escape backslashes for R
         datashare_path = datashare_path.replace('\\', '\\\\')
-        os.system(f'set JUPYTER_LIB_DIR={datashare_path} && docker compose up --build')
+        os.system(f'set JUPYTER_LIB_DIR={datashare_path} && docker compose up --build --remove-orphans')
 
 if __name__ == '__main__':
     if os.path.exists(datashare_path) is False:
-        os.mkdir(datashare_path)
+        os.makedirs(datashare_path)
 
     print('>> Remove connection files')
 

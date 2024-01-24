@@ -1,0 +1,12 @@
+{
+  "shell_port": 57238,
+  "iopub_port": 57242,
+  "stdin_port": 57239,
+  "control_port": 57240,
+  "hb_port": 57244,
+  "ip": "host.docker.internal",
+  "key": "bb2b19b5-f73e92c787d04b0477d29361",
+  "transport": "tcp",
+  "signature_scheme": "hmac-sha256",
+  "kernel_name": ""
+}
