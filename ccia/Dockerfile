@@ -74,9 +74,6 @@ RUN cd /home/shiny \
     && bash Miniconda3-latest-Linux-x86_64.sh -b \
     && rm -f Miniconda3-latest-Linux-x86_64.sh
 
-ADD "https://api.github.com/repos/schienstockd/cecelia/commits?per_page=1" skipcache
-RUN R -e 'remotes::install_github("schienstockd/cecelia", Ncpus = 4, repos = "https://cloud.r-project.org", upgrade = "never")'
-
 RUN R -e 'cecelia::cciaCondaCreate(envType = "image-nogui")'
 RUN R -e 'cecelia::cciaUse();cecelia::cciaModels()'
 
