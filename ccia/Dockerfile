@@ -1,4 +1,4 @@
-FROM rocker/ml:4.2.0
+FROM rocker/ml:4.4.0
 
 ### init shiny
 RUN apt-get update && apt-get install -y \
