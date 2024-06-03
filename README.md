@@ -63,7 +63,7 @@ default:
         - "E:\\Cecelia\\Dominik\\projects"
 ```
 
-- Run (and build) the `Docker container` with `cecelia-MacOSX-docker.sh` (Mac)
+- Run (and build) the `Docker container` with `cecelia-MacOSX-docker.command` (Mac)
 or `cecelia-Windows-docker.bat` (Windows). This will start the local `napari` environment,
 build the `Docker container` during the first run and start the `app`.
 At the moment, the container will update the app whenever it is changed on github.
