@@ -8,7 +8,7 @@ services:
       - 6860
     volumes:
       - ~/.ssh:/cecelia/.ssh:ro
-      - ./datashare:/home/shiny/local
+      - ./datashare:/home/jovyan/local
       - ~/cecelia/projects/:/cecelia/projects
       - ~/cecelia/:/cecelia/data
       #- /Volumes/Lab-Mueller/:/cecelia/lab

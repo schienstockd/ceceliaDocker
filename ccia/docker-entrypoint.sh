@@ -26,7 +26,7 @@ R -e 'file.copy(system.file("config.yml",package="cecelia"),"/home/jovyan/local/
 
 # copy in local cecelia files
 echo ">> Update app"
-R -e 'renv::load("/home/jovyan/cecelia");cecelia::cciaUse("/home/jovyan/local/cecelia",initConda=FALSE,sourceConda=FALSE,RETICULATE_MINICONDA_PATH="/home/jovyan/miniconda3");cecelia::cciaCreateApp()'
+R -e 'Sys.setenv(RETICULATE_MINICONDA_PATH="/home/jovyan/miniconda3");renv::load("/home/jovyan/cecelia");cecelia::cciaUse("/home/jovyan/local/cecelia",initConda=FALSE,sourceConda=FALSE);cecelia::cciaCreateApp()'
 
 # copy models
 cp -R /home/jovyan/cecelia/models /home/jovyan/local/cecelia/
@@ -39,7 +39,7 @@ cp /home/jovyan/local/docker.yml /home/jovyan/local/cecelia/
 mv /home/jovyan/local/connectionFile.* /home/jovyan/local/cecelia/app/viewer/
 
 # start shiny
-R_CALL="renv::load('/home/jovyan/cecelia');library(cecelia);cciaUse('/home/jovyan/local/cecelia',initJupyter=TRUE,jupyterConnectionFile='/home/jovyan/local/cecelia/app/viewer/connectionFile.json',jupyterLibDir='$1',RETICULATE_MINICONDA_PATH='/home/jovyan/miniconda3');cciaRunApp(port=6860,host='0.0.0.0')"
+R_CALL="Sys.setenv(RETICULATE_MINICONDA_PATH='/home/jovyan/miniconda3');renv::load('/home/jovyan/cecelia');library(cecelia);cciaUse('/home/jovyan/local/cecelia',initJupyter=TRUE,jupyterConnectionFile='/home/jovyan/local/cecelia/app/viewer/connectionFile.json',jupyterLibDir='$1');cciaRunApp(port=6860,host='0.0.0.0')"
 R -e $R_CALL
 
 #exec "$@"
