@@ -3,19 +3,19 @@
 #set -e
 
 # for SSH keyfiles
-cp -R /tmp/.ssh /home/shiny/.ssh
-chown -R shiny:shiny /home/shiny/.ssh
-chmod 700 /home/shiny/.ssh
-chmod 600 -R /home/shiny/.ssh/*
+cp -R /tmp/.ssh /home/jovyan/.ssh
+chown -R jovyan:jovyan /home/jovyan/.ssh
+chmod 700 /home/jovyan/.ssh
+chmod 600 -R /home/jovyan/.ssh/*
 
 # expose python libraries
 # TODO how else would you do that .. ?
 # https://stackoverflow.com/a/38946665
-rm /home/shiny/local/py/*.py
-rm /home/shiny/local/py/*/*.py
-rm -fr /home/shiny/local/py/__pycache__
-R -e 'file.copy(system.file("py",package="cecelia"),"/home/shiny/local/",recursive=TRUE)'
-R -e 'file.copy(system.file("config.yml",package="cecelia"),"/home/shiny/local/")'
+rm /home/jovyan/local/py/*.py
+rm /home/jovyan/local/py/*/*.py
+rm -fr /home/jovyan/local/py/__pycache__
+R -e 'file.copy(system.file("py",package="cecelia"),"/home/jovyan/local/",recursive=TRUE)'
+R -e 'file.copy(system.file("config.yml",package="cecelia"),"/home/jovyan/local/")'
 
 # HPC server keygen here
 # su - shiny -c "ssh-keyscan spartan.hpc.unimelb.edu.au > ~/.ssh/known_hosts"
@@ -26,20 +26,20 @@ R -e 'file.copy(system.file("config.yml",package="cecelia"),"/home/shiny/local/"
 
 # copy in local cecelia files
 echo ">> Update app"
-R -e 'cecelia::cciaUse("/home/shiny/local/cecelia",initConda=FALSE,sourceConda=FALSE);cecelia::cciaCreateApp()'
+R -e 'renv::load("/home/jovyan/cecelia");cecelia::cciaUse("/home/jovyan/local/cecelia",initConda=FALSE,sourceConda=FALSE,RETICULATE_MINICONDA_PATH="/home/jovyan/miniconda3");cecelia::cciaCreateApp()'
 
 # copy models
-cp -R /home/shiny/cecelia/models /home/shiny/local/cecelia/
+cp -R /home/jovyan/cecelia/models /home/jovyan/local/cecelia/
 
 # copy config files
-cp /home/shiny/local/custom.yml /home/shiny/local/cecelia/
-cp /home/shiny/local/docker.yml /home/shiny/local/cecelia/
+cp /home/jovyan/local/custom.yml /home/jovyan/local/cecelia/
+cp /home/jovyan/local/docker.yml /home/jovyan/local/cecelia/
 
 # move jupyter files
-mv /home/shiny/local/connectionFile.* /home/shiny/local/cecelia/app/viewer/
+mv /home/jovyan/local/connectionFile.* /home/jovyan/local/cecelia/app/viewer/
 
 # start shiny
-R_CALL="library(cecelia);cciaUse('/home/shiny/local/cecelia',initJupyter=TRUE,jupyterConnectionFile='/home/shiny/local/cecelia/app/viewer/connectionFile.json',jupyterLibDir='$1');cciaRunApp(port=6860,host='0.0.0.0')"
+R_CALL="renv::load('/home/jovyan/cecelia');library(cecelia);cciaUse('/home/jovyan/local/cecelia',initJupyter=TRUE,jupyterConnectionFile='/home/jovyan/local/cecelia/app/viewer/connectionFile.json',jupyterLibDir='$1',RETICULATE_MINICONDA_PATH='/home/jovyan/miniconda3');cciaRunApp(port=6860,host='0.0.0.0')"
 R -e $R_CALL
 
 #exec "$@"

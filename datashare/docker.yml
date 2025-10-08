@@ -3,7 +3,7 @@ default:
     useDocker: TRUE
     pathMapping:
       home:
-        from: "/home/shiny/local/cecelia"
+        from: "/home/jovyan/local/cecelia"
         to: "D:\\Public\\Cecelia\\GIT\\datashare\\cecelia"
         # to: "/Users/Dominik/R-workspace/ceceliaDocker/datashare/cecelia"
       projects:
