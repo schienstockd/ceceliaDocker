@@ -9,8 +9,8 @@ services:
     volumes:
       - ~/.ssh:/cecelia/.ssh:ro
       - ./datashare:/home/shiny/local
-      - /Volumes/USER_data/Dominik/CECELIA_DOCKER/projects/:/cecelia/projects
-      - /Volumes/USER_data/Communal/:/cecelia/data
+      - ~/cecelia/projects/:/cecelia/projects
+      - ~/cecelia/:/cecelia/data
       #- /Volumes/Lab-Mueller/:/cecelia/lab
     extra_hosts:
       - "host.docker.internal:host-gateway"

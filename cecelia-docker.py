@@ -3,7 +3,8 @@ import os
 import platform
 import time
 import shutil
-import IPython
+# import IPython
+from jupyter_client import KernelManager
 from multiprocessing import Process
 import urllib.request
 import webbrowser
@@ -19,10 +20,11 @@ debug_file = os.path.join(datashare_path, 'connectionFile.debug.json')
 shiny_url = 'http://localhost:6860'
 
 # start ipython kernel detached
-def start_ipython(conn_file):
-  print('>> Start IPython')
-
-  IPython.start_kernel(argv=[f'-f={conn_file}'])
+# DOESN'T WORK ANYMORE
+# def start_ipython(conn_file):
+#   print('>> Start IPython')
+#   
+#   IPython.start_kernel(argv=[f'-f={conn_file}'])
 
 # start ipython kernel detached
 def start_docker(datashare_path):
@@ -52,21 +54,25 @@ if __name__ == '__main__':
     os.remove(conn_file)
 
   # start ipython
-  p1 = Process(target = start_ipython, args = (debug_file,))
-  p1.start()
-
-  # wait until jupyter started and replace for docker
-  ipython_init = False
-
-  print('>> wait for kernel...')
-
-  while ipython_init is False:
-    if os.path.exists(debug_file):
-      ipython_init = True
-    else:
-      time.sleep(0.5)
-
-  print('>> OK')
+  # p1 = Process(target = start_ipython, args = (debug_file,))
+  # p1.start()
+  # 
+  # # wait until jupyter started and replace for docker
+  # ipython_init = False
+  # 
+  # print('>> wait for kernel...')
+  # 
+  # while ipython_init is False:
+  #   if os.path.exists(debug_file):
+  #     ipython_init = True
+  #   else:
+  #     time.sleep(0.5)
+  # 
+  # print('>> OK')
+  
+  km = KernelManager(kernel_name='python3')
+  km.connection_file = debug_file
+  km.start_kernel()
 
   # replace host
   with open(debug_file, 'r') as file:
