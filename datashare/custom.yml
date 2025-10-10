@@ -1,7 +1,7 @@
 default:
   dirs:
     bftools: "/opt/tools/bftools"
-    bioformats2raw: "/opt/tools/bioformats2raw-0.6.1"
+    bioformats2raw: "/opt/tools/bioformats2raw-0.11.0"
     blosc: ""
     projects: "/cecelia/projects"
   volumes:
@@ -16,7 +16,7 @@ default:
       connectionFile: "connectionFile.json"
     conda:
       env: "r-cecelia-env"
-      dir: "/home/shiny/miniconda3/"
+      dir: "/home/jovyan/miniconda3/"
       source:
         env: r-cecelia-env
   imagej:

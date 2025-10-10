@@ -3,27 +3,23 @@ channels:
   - conda-forge
 dependencies:
   - python=3.12
-  - numpy
-  - python-dateutil
-  - pytz
-  - openjdk
-  - pip
+  - numpy=1.26.4
+  - python-dateutil=2.9.0.post0
+  - pytz=2025.2
+  - pip=25.2
   - pip:
-    - jupyter
-    - napari[all]
-    - napari-animation
-    - apoc
-    - napari-accelerated-pixel-and-object-classification
-    - h5py
-    - scikit-image
-    - scanpy
-    - zarr
-    - dask
-    - anndata
-    - tifffile
-    - shapely
-    - pip
-    - pyopencl
-    - pandas
-    - trimesh
-    - ome-types
+    - jupyter==1.1.1
+    - napari[all]==0.6.4
+    - napari-animation==0.0.9
+    - h5py==3.14.0
+    - scikit-image==0.25.2
+    - scanpy==1.11.4
+    - zarr==2.18.7
+    - dask==2024.11.2
+    - anndata==0.12.2
+    - tifffile==2025.9.20
+    - shapely==2.1.1
+    - pyopencl==2025.2.6
+    - pandas==2.3.2
+    - trimesh==4.8.2
+    - ome-types==0.5.3

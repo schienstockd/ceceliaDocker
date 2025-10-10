@@ -14,8 +14,6 @@ chmod 600 -R /home/jovyan/.ssh/*
 rm /home/jovyan/local/py/*.py
 rm /home/jovyan/local/py/*/*.py
 rm -fr /home/jovyan/local/py/__pycache__
-R -e 'file.copy(system.file("py",package="cecelia"),"/home/jovyan/local/",recursive=TRUE)'
-R -e 'file.copy(system.file("config.yml",package="cecelia"),"/home/jovyan/local/")'
 
 # HPC server keygen here
 # su - shiny -c "ssh-keyscan spartan.hpc.unimelb.edu.au > ~/.ssh/known_hosts"
@@ -26,7 +24,7 @@ R -e 'file.copy(system.file("config.yml",package="cecelia"),"/home/jovyan/local/
 
 # copy in local cecelia files
 echo ">> Update app"
-R -e 'Sys.setenv(RETICULATE_MINICONDA_PATH="/home/jovyan/miniconda3");renv::load("/home/jovyan/cecelia");cecelia::cciaUse("/home/jovyan/local/cecelia",initConda=FALSE,sourceConda=FALSE);cecelia::cciaCreateApp()'
+R -e 'Sys.setenv(RETICULATE_MINICONDA_PATH="/home/jovyan/miniconda3");renv::load("/home/jovyan/cecelia");file.copy(system.file("py",package="cecelia"),"/home/jovyan/local/",recursive=TRUE);file.copy(system.file("config.yml",package="cecelia"),"/home/jovyan/local/");cecelia::cciaUse("/home/jovyan/local/cecelia",initConda=FALSE,sourceConda=FALSE);cecelia::cciaCreateApp()'
 
 # copy models
 cp -R /home/jovyan/cecelia/models /home/jovyan/local/cecelia/

@@ -4,9 +4,9 @@ default:
     pathMapping:
       home:
         from: "/home/jovyan/local/cecelia"
-        to: "D:\\Public\\Cecelia\\GIT\\datashare\\cecelia"
-        # to: "/Users/Dominik/R-workspace/ceceliaDocker/datashare/cecelia"
+        # to: "D:\\Public\\Cecelia\\GIT\\datashare\\cecelia"
+        to: "/Users/domsch/R-workspace/ceceliaDocker/datashare/cecelia"
       projects:
         from: "/cecelia/projects"
-        to: "D:\\Public\\Cecelia\\PROJECTS"
-        # to: "/Volumes/USER_data/Dominik/CECELIA_DOCKER"
+        # to: "D:\\Public\\Cecelia\\PROJECTS"
+        to: "/Users/domsch/cecelia/projects"
